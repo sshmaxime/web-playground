@@ -1,0 +1,32 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedPrivateClassMembers": "error",
+				"noUnusedVariables": "error"
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true
+	},
+	"files": {
+		"maxSize": 2097152,
+		"ignore": ["package.json", ".next/**/*", "coverage/**/*", ".vercel"],
+		"ignoreUnknown": true
+	},
+	"vcs": {
+		"enabled": true,
+		"useIgnoreFile": true,
+		"clientKind": "git"
+	},
+	"json": {
+		"parser": {
+			"allowComments": true
+		}
+	}
+}

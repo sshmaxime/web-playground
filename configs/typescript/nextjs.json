@@ -1,0 +1,22 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Next.js",
+	"extends": "./base.json",
+	"compilerOptions": {
+		"plugins": [{ "name": "next" }],
+		"allowJs": true,
+		"declaration": false,
+		"esModuleInterop": true,
+		"declarationMap": false,
+		"incremental": true,
+		"jsx": "preserve",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"module": "esnext",
+		"resolveJsonModule": true,
+		"noEmit": false,
+		"target": "ES2020",
+		"paths": {
+			"@web-playground/ui/*": ["../../packages/ui/src/*"]
+		}
+	}
+}

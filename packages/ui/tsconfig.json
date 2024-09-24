@@ -1,0 +1,10 @@
+{
+	"extends": "@web-playground/config-typescript/react-library.json",
+	"include": ["."],
+	"compilerOptions": {
+		"paths": {
+			"@web-playground/ui/*": ["./src/*"]
+		}
+	},
+	"exclude": ["dist", "build", "node_modules"]
+}
