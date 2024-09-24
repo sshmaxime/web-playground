@@ -1,11 +1,12 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 type AppState = {};
 
 const useAppState = create<AppState>()(
 	devtools(
-		persist((set) => ({}), {
+		persist(() => ({}), {
 			name: "app-state",
 		}),
 	),

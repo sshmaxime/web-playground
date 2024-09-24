@@ -1,6 +1,12 @@
-import { cn } from "@web-playground/ui/utils/cn";
+import { cn } from "@web-playground/ui/shadcn/lib/utils/cn";
 
 interface TypographyProps extends React.HTMLAttributes<HTMLElement> {}
+
+const H0 = ({ children, className, ...props }: TypographyProps) => (
+	<h1 className={cn("text-left text-4xl", className)} {...props}>
+		{children}
+	</h1>
+);
 
 const H1 = ({ children, className, ...props }: TypographyProps) => (
 	<h1 className={cn("text-left text-2xl", className)} {...props}>
@@ -44,4 +50,4 @@ const P = ({ children, className, ...props }: TypographyProps) => (
 	</p>
 );
 
-export { H1, H2, H3, H4, H5, H6, P };
+export { H0, H1, H2, H3, H4, H5, H6, P };
