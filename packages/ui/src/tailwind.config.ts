@@ -12,10 +12,7 @@ const config = {
 	],
 	prefix: "",
 	theme: {
-		screens: {
-			xs: "450px",
-			...defaultTheme.screens,
-		},
+		screens: { ...defaultTheme.screens },
 		container: {
 			center: true,
 			padding: "2rem",
@@ -83,7 +80,7 @@ const config = {
 			},
 		},
 	},
-	plugins: [tailwindcssAnimate, tailwindcssTypography],
+	plugins: [tailwindcssTypography, tailwindcssAnimate],
 } satisfies Config;
 
 export default config;
