@@ -25,8 +25,6 @@ import { BLOCKS } from "src/app/blocks/metadata";
 import { DASHBOARD } from "src/app/metadata";
 import { TRANSACTIONS } from "src/app/transactions/metadata";
 import Logo from "src/assets/logo-full.svg";
-
-import { useStore } from "src/store";
 import {
 	ListItem,
 	NavigationMenuItem,
@@ -39,14 +37,11 @@ const Header = () => {
 	const { fullRoute } = useClient();
 	const banner = useBanner();
 
-	const { toggle } = useStore();
-
 	const [network, setNetwork] = useState("mainnet");
 
 	return (
 		<Box>
 			<Banner banner={banner} />
-			<Box onClick={toggle}>cc</Box>
 
 			<HeaderPrimitive className="relative z-50 backdrop-blur md:block">
 				<Box className="flex h-8 items-center justify-between">

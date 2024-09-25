@@ -50,4 +50,10 @@ const P = ({ children, className, ...props }: TypographyProps) => (
 	</p>
 );
 
-export { H0, H1, H2, H3, H4, H5, H6, P };
+const SP = ({ children, className, ...props }: TypographyProps) => (
+	<p className={cn("text-left text-sm", className)} {...props}>
+		{children}
+	</p>
+);
+
+export { H0, H1, H2, H3, H4, H5, H6, P, SP };

@@ -10,6 +10,8 @@ import { Check, Loader2, Plus } from "lucide-react";
 import type { Banner } from "@components/banner";
 import { Badge } from "@web-playground/ui/shadcn/components/badge";
 import { Button } from "@web-playground/ui/shadcn/components/button";
+import { Box } from "@web-playground/ui/system/base/box";
+import { SP } from "@web-playground/ui/system/typography";
 import Link from "next/link";
 import { BLOCK } from "../app/blocks/[id]/metadata";
 import { TRANSACTION } from "../app/transactions/[id]/metadata";
@@ -215,12 +217,14 @@ const useLatestBlocks = () => {
 					className="h-auto p-0 hover:bg-transparent"
 				>
 					<Link href={BLOCK.href + block.id}>
-						<div>
-							<p className="font-semibold">{block.id}</p>
+						<Box>
+							<SP className="font-semibold underline underline-offset-[3px]">
+								{block.id}
+							</SP>
 							<div className="text-xs text-muted-foreground">
 								{timeAgo(block.timestamp)}
 							</div>
-						</div>
+						</Box>
 					</Link>
 				</Button>
 			),
@@ -260,7 +264,6 @@ const useLatestBlocks = () => {
 	];
 
 	return {
-		dedwe: "dwed",
 		data,
 		header,
 	};
@@ -384,7 +387,9 @@ const useLatestTxs = () => {
 				>
 					<Link href={TRANSACTION.href + block.hash}>
 						<div>
-							<p className="font-semibold">{shorten0x(block.hash)}</p>
+							<SP className="font-semibold underline underline-offset-[3px]">
+								{shorten0x(block.hash)}
+							</SP>
 							<div className="text-xs text-muted-foreground">
 								{timeAgo(block.timestamp)}
 							</div>
@@ -470,7 +475,7 @@ const useLatestTxs = () => {
 };
 
 const shorten0x = (str: string) => {
-	return `${str.substring(0, 10)}...`;
+	return `${str.substring(0, 5)}...${str.substring(str.length - 3, str.length)}`;
 };
 
 export {

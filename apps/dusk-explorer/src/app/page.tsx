@@ -132,8 +132,8 @@ const Dashboard = () => {
 
 			<Box className="h-12" />
 
-			<div className="grid grid-cols-7 gap-y-16 md:gap-x-16">
-				<div className="col-span-full md:col-span-3">
+			<div className="grid grid-cols-8 gap-y-16 sm:gap-x-16">
+				<div className="col-span-full lg:col-span-4 space-y-4">
 					<div className="flex justify-between">
 						<H1 className="font-bold tracking-tight">Latest Blocks</H1>
 						<div className="flex place-self-end">
@@ -149,10 +149,11 @@ const Dashboard = () => {
 							</Button>
 						</div>
 					</div>
+
 					<DataTable columns={headerLatestBlocks} data={dataLatestBlocks} />
 				</div>
 
-				<div className="col-span-full md:col-span-4 space-y-4">
+				<div className="col-span-full lg:col-span-4 space-y-4">
 					<div className="flex justify-between">
 						<H1 className="font-bold tracking-tight">Latest Transactions</H1>
 						<div className="flex place-self-end">
@@ -168,6 +169,7 @@ const Dashboard = () => {
 							</Button>
 						</div>
 					</div>
+
 					<DataTable columns={headerLatestTxs} data={dataLatestTxs} />
 				</div>
 			</div>

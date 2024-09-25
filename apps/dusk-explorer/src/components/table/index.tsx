@@ -19,6 +19,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@web-playground/ui/shadcn/components/table";
+import { Box } from "@web-playground/ui/system/base/box";
 import React, { type ComponentProps } from "react";
 import DataTablePagination from "./pagination";
 
@@ -59,7 +60,7 @@ export function DataTable<TData extends RowProps, TValue>({
 	});
 
 	return (
-		<div className="space-y-3">
+		<Box className="space-y-2">
 			<Card>
 				<Table>
 					<TableHeader>
@@ -80,6 +81,7 @@ export function DataTable<TData extends RowProps, TValue>({
 							</TableRow>
 						))}
 					</TableHeader>
+
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (
@@ -111,7 +113,8 @@ export function DataTable<TData extends RowProps, TValue>({
 					</TableBody>
 				</Table>
 			</Card>
+
 			<DataTablePagination table={table} options={paginationOptions} />
-		</div>
+		</Box>
 	);
 }
