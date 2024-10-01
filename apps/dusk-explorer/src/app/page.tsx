@@ -3,10 +3,10 @@
 import { Card } from "@web-playground/ui/shadcn/components/card";
 
 import { Page } from "@components/layouts/page";
-import { DataTable } from "@components/table";
 import { Button } from "@web-playground/ui/shadcn/components/button";
 import { Separator } from "@web-playground/ui/shadcn/components/separator";
 import { Box } from "@web-playground/ui/system/base/box";
+import { DataTable } from "@web-playground/ui/system/table";
 import { H1, H4, H5, H6 } from "@web-playground/ui/system/typography";
 import {
 	ArrowLeftRight,

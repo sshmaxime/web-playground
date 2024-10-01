@@ -1,7 +1,7 @@
 "use client";
 
 import { Page } from "@components/layouts/page";
-import { DataTable } from "@components/table";
+import { DataTable } from "@web-playground/ui/system/table";
 import { useLatestTxs } from "../../utils";
 
 const Transactions = () => {
