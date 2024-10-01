@@ -3,7 +3,7 @@ import "./system.css";
 
 import { Analytics } from "@vercel/analytics/react";
 
-import { fontSans } from "@web-playground/ui/fonts";
+import { inter } from "@web-playground/ui/fonts";
 
 import { Providers } from "@config/providers";
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={fontSans.className} suppressHydrationWarning>
+		<html lang="en" className={inter.className} suppressHydrationWarning>
 			<meta name="theme-color" content="transparent" />
 
 			<body className="flex-col antialiased">

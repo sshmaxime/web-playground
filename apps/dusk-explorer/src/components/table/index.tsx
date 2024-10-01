@@ -51,12 +51,7 @@ export function DataTable<TData extends RowProps, TValue>({
 		getPaginationRowModel: getPaginationRowModel(),
 		onSortingChange: setSorting,
 		getSortedRowModel: getSortedRowModel(),
-		state: {
-			sorting,
-			columnVisibility: {
-				// TODO
-			},
-		},
+		state: { sorting, columnVisibility: {} },
 	});
 
 	return (

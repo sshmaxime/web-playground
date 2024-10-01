@@ -1,6 +1,6 @@
-import { Inter as FontSans, Roboto } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 
-const fontSans = FontSans({
+const inter = Inter({
 	subsets: ["latin"],
 	variable: "--font-sans",
 });
@@ -11,4 +11,4 @@ const roboto = Roboto({
 	variable: "--font-roboto",
 });
 
-export { fontSans, roboto };
+export { inter, roboto };
