@@ -1,0 +1,22 @@
+{
+  "name": "@web-playground/utils",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "yarn build --watch",
+    "build": "tsup",
+    "quality": "biome check .",
+    "quality:fix": "biome check --apply ."
+  },
+  "dependencies": {
+    "type-fest": "^4.23.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.6.4",
+    "tsup": "^8.0.2",
+    "typescript": "^5.2.2"
+  }
+}
