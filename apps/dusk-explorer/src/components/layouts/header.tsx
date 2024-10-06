@@ -73,10 +73,7 @@ const Header = () => {
 						/>
 					</Link>
 
-					<Separator
-						orientation="vertical"
-						className="ml-5 mr-4 h-[50%] translate-y-1/2"
-					/>
+					<Separator orientation="vertical" className="ml-5 mr-4 h-[50%] translate-y-1/2" />
 
 					<Combobox
 						className="self-center"
@@ -86,10 +83,7 @@ const Header = () => {
 						onChange={setNetwork}
 					/>
 
-					<Separator
-						orientation="vertical"
-						className="ml-5 mr-4 h-[50%] translate-y-1/2"
-					/>
+					<Separator orientation="vertical" className="ml-5 mr-4 h-[50%] translate-y-1/2" />
 
 					<NavigationMenu>
 						<NavigationMenuList>
