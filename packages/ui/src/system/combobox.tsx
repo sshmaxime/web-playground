@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import { Button } from "@web-playground/ui/shadcn/components/button";
 
 import {
@@ -10,83 +8,76 @@ import {
 	CommandGroup,
 	CommandInput,
 	CommandItem,
+	CommandList,
 } from "@web-playground/ui/shadcn/components/command";
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from "@web-playground/ui/shadcn/components/popover";
+import { Box } from "@web-playground/ui/system/base/box";
 import { cn } from "@web-playground/ui/utils/cn";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { useState } from "react";
 
 type Props = {
 	searching: string;
-	value: string;
+	value: string | undefined;
 	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	onChange: Function;
-	items: { value: string; label: string }[];
+	items: string[];
 	className: string;
 };
 
-export function Combobox({
-	items,
-	searching,
-	value,
-	onChange,
-	className,
-}: Props) {
-	const [open, setOpen] = React.useState(false);
+export function Combobox({ items, searching, value, onChange, className }: Props) {
+	const [open, setOpen] = useState(false);
 
 	return (
-		<div className={cn(className)}>
+		<Box className={className}>
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<Button
 						variant="outline"
 						role="combobox"
 						aria-expanded={open}
-						className="w-[200px] justify-between capitalize"
+						className="w-[200px] justify-between"
 					>
-						{value
-							? items.find((item) => item.value === value)?.label
-							: `Select ${searching}...`}
-						<ChevronsUpDown
-							className={cn("ml-2 h-4 w-4 shrink-0 opacity-50")}
-						/>
+						{value ? items.find((framework) => framework === value) : "Select framework..."}
+						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 					</Button>
 				</PopoverTrigger>
 
 				<PopoverContent className="w-[200px] p-0">
 					<Command>
-						<CommandInput placeholder={`${searching} ...`} className="h-9" />
-						<CommandEmpty>No {searching} found.</CommandEmpty>
-						<CommandGroup>
-							{items.map((item) => (
-								<CommandItem
-									key={item.value}
-									value={item.value}
-									className={cn(
-										"capitalize",
-										item.value === value ? "bg-accent" : "",
-									)}
-									onSelect={(currentValue) => {
-										onChange(currentValue === value ? "" : currentValue);
-										setOpen(false);
-									}}
-								>
-									{item.label}
-									<Check
-										className={cn(
-											"ml-auto h-4 w-4",
-											value === item.value ? "opacity-100" : "opacity-0",
-										)}
-									/>
-								</CommandItem>
-							))}
-						</CommandGroup>
+						<CommandInput placeholder={`${searching} ...`} />
+						<CommandList>
+							<CommandEmpty>No framework found.</CommandEmpty>
+
+							<CommandGroup>
+								{items.map((framework) => (
+									<CommandItem
+										key={framework}
+										value={framework}
+										className="cursor-pointer"
+										onSelect={(currentValue) => {
+											onChange(currentValue === value ? "" : currentValue);
+											setOpen(false);
+										}}
+									>
+										<Check
+											className={cn(
+												"mr-2 h-4 w-4",
+												value === framework ? "opacity-100" : "opacity-0",
+											)}
+										/>
+										{framework}
+									</CommandItem>
+								))}
+							</CommandGroup>
+						</CommandList>
 					</Command>
 				</PopoverContent>
 			</Popover>
-		</div>
+		</Box>
 	);
 }

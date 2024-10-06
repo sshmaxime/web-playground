@@ -66,10 +66,7 @@ export function DataTable<TData extends RowProps, TValue>({
 										<TableHead key={header.id} className="h-10 px-4">
 											{header.isPlaceholder
 												? null
-												: flexRender(
-														header.column.columnDef.header,
-														header.getContext(),
-													)}
+												: flexRender(header.column.columnDef.header, header.getContext())}
 										</TableHead>
 									);
 								})}
@@ -87,20 +84,14 @@ export function DataTable<TData extends RowProps, TValue>({
 								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id} className="px-4">
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext(),
-											)}
+											{flexRender(cell.column.columnDef.cell, cell.getContext())}
 										</TableCell>
 									))}
 								</TableRow>
 							))
 						) : (
 							<TableRow>
-								<TableCell
-									colSpan={columns.length}
-									className="h-24 text-center"
-								>
+								<TableCell colSpan={columns.length} className="h-24 text-center">
 									No results.
 								</TableCell>
 							</TableRow>
