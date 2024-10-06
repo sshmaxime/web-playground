@@ -1,36 +1,109 @@
 "use client";
 
-import {
-	useGlobalPortalStats,
-	usePortalLatestXMsgReceived,
-	usePortalLatestXMsgSent,
-} from "@hooks/usePortalStats";
-import { Card, CardHeader } from "@web-playground/ui/shadcn/components/card";
+import { LoaderCircle } from "lucide-react";
+import React, { useState } from "react";
 
-import { XMsgReceivedTable } from "@components/xMsgReceivedTable";
-import { XMsgSentTable } from "@components/xMsgSentTable";
+import { cn } from "@web-playground/ui/utils/cn";
+
+import { Card, CardHeader } from "@web-playground/ui/shadcn/components/card";
+import { Separator } from "@web-playground/ui/shadcn/components/separator";
+
 import { Box } from "@web-playground/ui/system/base/box";
 import { Container } from "@web-playground/ui/system/base/container";
+import { Combobox } from "@web-playground/ui/system/combobox";
+import { CopyText } from "@web-playground/ui/system/copyText";
 import { H1, H3, H4, H5, H6 } from "@web-playground/ui/system/typography";
-import type { Network } from "src/schema/networks";
+
+import { XMsgEventTable } from "@components/tables/xMsgEventTable";
+import { XReceiptEventTable } from "@components/tables/xReceiptEventTable";
+
+import { OMNI_PORTAL_ADDRESS } from "@config/constants/addresses";
+import { usePortalLatestXMsgXReceipt, usePortalXMsgStats } from "@hooks/usePortal";
+import { ChainConfigs, type SupportedChain, zSupportedChain } from "@schemas/chains";
+import { useAppStore } from "@store/app";
 
 const App = () => {
-	const network: Network = "Omni";
+	const { getChainConfig, switchToChain } = useAppStore();
+	const chain = getChainConfig();
 
-	const { xmsgReceived, xmsgSent, activitySinceLastWeek } =
-		useGlobalPortalStats(network);
+	const [chainFilter, setChainFilter] = useState<SupportedChain>();
 
-	const { latestXMsgReceived } = usePortalLatestXMsgReceived(network);
-	const { latestXMsgSent } = usePortalLatestXMsgSent(network);
+	const supportedChains = Object.values(zSupportedChain.Enum);
+
+	const {
+		data: { outXMsgOffset, inXMsgOffset, totalXMsg },
+		isLoading: isLoadingXMsgStats,
+	} = usePortalXMsgStats(chain.omniId, chainFilter);
+
+	const {
+		data: { latestXMsgEvents, latestXReceiptEvents },
+		isLoading: isLoadingLatestXMsgXReceipt,
+	} = usePortalLatestXMsgXReceipt(chain.omniId, chainFilter);
+
+	React.useEffect(() => {
+		chain;
+
+		setChainFilter(undefined);
+	}, [chain]);
 
 	return (
 		<Container className="mt-10">
-			<Box>
-				<H1 className="font-bold tracking-tighter">Ethereum</H1>
+			<Box className="space-y-1">
+				<Box className="flex">
+					{supportedChains.map((item) => (
+						<Box key={item} className="flex" onClick={() => switchToChain(item)}>
+							<H1
+								className={cn(
+									"transition-all font-bold tracking-tighter px-2 cursor-pointer text-muted-foreground",
+									chain.omniId === item && "text-primary",
+								)}
+							>
+								{ChainConfigs[item].name}
+							</H1>
 
-				<Box className="bg-muted py-1 px-2 inline-block rounded">
-					<H4 className="text-muted-foreground text-sm">Portal: 0x123456789</H4>
+							<Separator orientation="vertical" />
+						</Box>
+					))}
 				</Box>
+
+				<Box>
+					<Box className="bg-muted py-1 px-2 rounded inline-flex gap-2 items-center">
+						<H4 className="text-muted-foreground text-sm">
+							<b>Chain Id</b>: {chain.id}
+						</H4>
+						<CopyText
+							textToCopy={chain.id.toString()}
+							iconSize={14}
+							className="text-muted-foreground"
+						/>
+					</Box>
+				</Box>
+
+				<Box>
+					<Box className="bg-muted py-1 px-2 rounded inline-flex gap-2 items-center">
+						<H4 className="text-muted-foreground text-sm">
+							<b>Portal</b>: {OMNI_PORTAL_ADDRESS}
+						</H4>
+						<CopyText
+							textToCopy={OMNI_PORTAL_ADDRESS}
+							iconSize={14}
+							className="text-muted-foreground"
+						/>
+					</Box>
+				</Box>
+			</Box>
+
+			<Box className="h-4" />
+
+			<Box className="space-y-1">
+				<H4 className="font-bold">Filter by chain</H4>
+				<Combobox
+					items={supportedChains}
+					searching="Chains"
+					onChange={setChainFilter}
+					value={chainFilter}
+					className=""
+				/>
 			</Box>
 
 			<Box className="h-2" />
@@ -38,50 +111,50 @@ const App = () => {
 			<Box className="flex justify-between gap-4">
 				<Card className="grow">
 					<CardHeader>
-						<H5 className="tracking-tight text-sm font-semibold">
-							XMsgs received
-						</H5>
+						<H5 className="tracking-tight text-sm font-medium">Total XMsgs received</H5>
 
-						<H1 className="font-bold">{xmsgReceived}</H1>
+						{isLoadingXMsgStats && <LoaderCircle className="animate-spin" />}
+						{!isLoadingXMsgStats && <H1 className="font-bold">{inXMsgOffset}</H1>}
 					</CardHeader>
 				</Card>
 
 				<Card className="grow">
 					<CardHeader>
-						<H5 className="tracking-tight text-sm font-semibold">XMsgs sent</H5>
+						<H5 className="tracking-tight text-sm font-medium">Total XMsgs sent</H5>
 
-						<H1 className="font-bold">{xmsgSent}</H1>
+						{isLoadingXMsgStats && <LoaderCircle className="animate-spin" />}
+						{!isLoadingXMsgStats && <H1 className="font-bold">{outXMsgOffset}</H1>}
 					</CardHeader>
 				</Card>
 
 				<Card className="grow">
 					<CardHeader>
-						<Box className="flex gap-1 items-baseline">
-							<H5 className="tracking-tight text-sm font-semibold">Activity</H5>
-							<H6 className="text-muted-foreground">
-								(Txs in the last 7 days)
-							</H6>
-						</Box>
+						<H5 className="tracking-tight text-sm font-medium">Total XMsgs</H5>
 
-						<H1 className="font-bold">{activitySinceLastWeek}</H1>
+						{isLoadingXMsgStats && <LoaderCircle className="animate-spin" />}
+						{!isLoadingXMsgStats && <H1 className="font-bold">{totalXMsg}</H1>}
 					</CardHeader>
 				</Card>
 			</Box>
 
 			<Box className="h-8" />
 
-			<Box className="grid grid-cols-8 gap-x-4">
-				<Box className="col-span-4 space-y-2">
+			<Box className="col-span-4 space-y-2">
+				<Box>
 					<H3 className="font-bold tracking-tight">Latest XMsgs received</H3>
-
-					<XMsgReceivedTable data={latestXMsgReceived} />
+					<H6 className="text-muted-foreground tracking-tight">(Latest 1000 blocks)</H6>
 				</Box>
 
-				<Box className="col-span-4 space-y-2">
+				<XMsgEventTable data={latestXMsgEvents} isLoading={isLoadingLatestXMsgXReceipt} />
+			</Box>
+
+			<Box className="col-span-4 space-y-2">
+				<Box>
 					<H3 className="font-bold tracking-tight">Latest XMsgs sent</H3>
-
-					<XMsgSentTable data={latestXMsgSent} />
+					<H6 className="text-muted-foreground tracking-tight">(Latest 1000 blocks)</H6>
 				</Box>
+
+				<XReceiptEventTable data={latestXReceiptEvents} isLoading={isLoadingLatestXMsgXReceipt} />
 			</Box>
 		</Container>
 	);
