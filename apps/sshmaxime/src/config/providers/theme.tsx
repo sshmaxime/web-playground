@@ -8,7 +8,7 @@ import { ThemeProvider as ThemeProviderPrimitive } from "@web-playground/ui/them
 const ThemeProvider = ({ children }: PropsWithChildren) => (
 	<ThemeProviderPrimitive
 		attribute="class"
-		defaultTheme="system"
+		defaultTheme="light"
 		enableSystem
 		disableTransitionOnChange
 	>

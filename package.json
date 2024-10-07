@@ -23,8 +23,7 @@
 	"workspaces": [
 		"apps/*",
 		"packages/*",
-		"configs/*",
-		"tests/*"
+		"configs/*"
 	],
 	"packageManager": "yarn@4.1.0"
 }
