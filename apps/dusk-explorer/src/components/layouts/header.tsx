@@ -77,7 +77,7 @@ const Header = () => {
 
 					<Combobox
 						className="self-center"
-						items={[{ value: "mainnet", label: "mainnet" }]}
+						items={["mainnet"]}
 						searching="Network"
 						value={network}
 						onChange={setNetwork}
