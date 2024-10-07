@@ -1,7 +1,7 @@
 "use client";
 
 import { LoaderCircle } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { cn } from "@web-playground/ui/utils/cn";
 
@@ -39,12 +39,6 @@ const App = () => {
 		data: { latestXMsgEvents, latestXReceiptEvents },
 		isLoading: isLoadingLatestXMsgXReceipt,
 	} = usePortalLatestXMsgXReceipt(chain.omniId, chainFilter);
-
-	React.useEffect(() => {
-		chain;
-
-		setChainFilter(undefined);
-	}, [chain]);
 
 	return (
 		<Container className="mt-10">
