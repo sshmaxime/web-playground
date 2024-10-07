@@ -1,21 +1,7 @@
-import { ChainConfigs, type SupportedChain } from "@schemas/chains";
 import { http, createConfig } from "@wagmi/core";
 
-/**
- * @dev
- */
-const ALCHEMY_API_URL = ".g.alchemy.com/v2/s892w_3Kxzw6WIPSPVYVT-rufLLDo7pp";
-
-/**
- * @dev
- */
-const RPCS = {
-	OmniOmega: "https://omega.omni.network",
-	Holesky: "https://1rpc.io/holesky",
-	OptimismSepolia: `https://opt-sepolia${ALCHEMY_API_URL}`,
-	ArbitrumSepolia: `https://arb-sepolia${ALCHEMY_API_URL}`,
-	BaseSepolia: `https://base-sepolia${ALCHEMY_API_URL}`,
-} as const satisfies { [key in SupportedChain]: string };
+import { ChainConfigs } from "@schemas/chains";
+import { RPCS } from "@server/blockchain/wagmi/rpcs";
 
 /**
  * @dev
@@ -37,4 +23,4 @@ const config = createConfig({
 	},
 });
 
-export { config, RPCS };
+export { config };
