@@ -4,7 +4,7 @@ import { OmniPortalABI } from "@config/abis/omniPortal";
 import { OMNI_PORTAL_ADDRESS } from "@config/constants/addresses";
 import { ChainConfigs, type SupportedChain } from "@schemas/chains";
 import type { PortalLatestXMsg, PortalStats } from "@schemas/portal";
-import { config } from "@server/blockchain/wagmi/config";
+import { config } from "@server/config/wagmi";
 import { getPublicClient, readContract, readContracts } from "@wagmi/core";
 
 const getSupportedNetworks = async (chainId: ChainConfigs["id"]) => {

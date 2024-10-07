@@ -1,7 +1,7 @@
 import { http, createConfig } from "@wagmi/core";
 
 import { ChainConfigs } from "@schemas/chains";
-import { RPCS } from "@server/blockchain/wagmi/rpcs";
+import { RPCS } from "@server/config/rpcs";
 
 /**
  * @dev
