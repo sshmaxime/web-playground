@@ -23,9 +23,7 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<span className="text-xs font-semibold">
-							v{PackageJson.version}
-						</span>
+						<span className="text-xs font-semibold">v{PackageJson.version}</span>
 					</div>
 				</div>
 			</FooterPrimitive>

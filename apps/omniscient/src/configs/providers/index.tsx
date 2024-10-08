@@ -2,8 +2,8 @@
 
 import type { PropsWithChildren } from "react";
 
-import { QueryProvider } from "@config/providers/query";
-import { ThemeProvider } from "@config/providers/theme";
+import { QueryProvider } from "@configs/providers/query";
+import { ThemeProvider } from "@configs/providers/theme";
 
 /**
  * @dev

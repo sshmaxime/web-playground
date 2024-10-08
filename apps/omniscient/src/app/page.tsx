@@ -17,9 +17,9 @@ import { H1, H3, H4, H5, H6 } from "@web-playground/ui/system/typography";
 import { XMsgEventTable } from "@components/tables/xMsgEventTable";
 import { XReceiptEventTable } from "@components/tables/xReceiptEventTable";
 
-import { OMNI_PORTAL_ADDRESS } from "@config/constants/addresses";
+import { OMNI_PORTAL_ADDRESS } from "@configs/constants/addresses";
+import { ChainConfigs, type SupportedChain, zSupportedChain } from "@configs/schemas/chains";
 import { usePortalLatestXMsgXReceipt, usePortalXMsgStats } from "@hooks/usePortal";
-import { ChainConfigs, type SupportedChain, zSupportedChain } from "@schemas/chains";
 import { useAppStore } from "@store/app";
 
 const App = () => {

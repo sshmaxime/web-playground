@@ -1,5 +1,5 @@
-import type { SupportedChain } from "@schemas/chains";
-import { ServerEnv } from "src/env/server";
+import { ServerEnv } from "@configs/env/server";
+import type { SupportedChain } from "@configs/schemas/chains";
 
 /**
  * @dev

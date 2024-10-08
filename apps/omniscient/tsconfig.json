@@ -7,8 +7,7 @@
 			"@components/*": ["src/components/*"],
 			"@hooks/*": ["src/hooks/*"],
 			"@assets/*": ["src/assets/*"],
-			"@schemas/*": ["src/schemas/*"],
-			"@config/*": ["src/config/*"],
+			"@configs/*": ["src/configs/*"],
 			"@server/*": ["src/server/*"],
 			"@store/*": ["src/store/*"]
 		}

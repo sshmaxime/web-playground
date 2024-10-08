@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { ChainConfigs, type SupportedChain } from "@schemas/chains";
+import { ChainConfigs, type SupportedChain } from "@configs/schemas/chains";
 
 type AppStore = {
 	chainName: SupportedChain;

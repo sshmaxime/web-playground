@@ -1,5 +1,5 @@
-import type { SupportedChain } from "@schemas/chains";
-import type { XMsgEventReadable, XReceiptEventReadable } from "@schemas/portal";
+import type { SupportedChain } from "@configs/schemas/chains";
+import type { XMsgEventReadable, XReceiptEventReadable } from "@configs/schemas/portal";
 import { useQuery } from "@tanstack/react-query";
 import { getPortalLatestXMsg, getPortalXMsgStats } from "src/server/actions/omniPortal";
 

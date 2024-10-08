@@ -2,7 +2,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import { CircleCheckBig, CircleX, LoaderCircle } from "lucide-react";
 
-import type { XReceiptEventReadable } from "@schemas/portal";
+import type { XReceiptEventReadable } from "@configs/schemas/portal";
 import { Evm } from "@web-playground/crypto";
 import { Box } from "@web-playground/ui/system/base/box";
 import { DataTable } from "@web-playground/ui/system/table";

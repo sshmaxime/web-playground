@@ -3,7 +3,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { LoaderCircle } from "lucide-react";
 import { formatEther } from "viem";
 
-import type { XMsgEventReadable } from "@schemas/portal";
+import type { XMsgEventReadable } from "@configs/schemas/portal";
 import { Evm } from "@web-playground/crypto";
 import { Box } from "@web-playground/ui/system/base/box";
 import { DataTable } from "@web-playground/ui/system/table";
