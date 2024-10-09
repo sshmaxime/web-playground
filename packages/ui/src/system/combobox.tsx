@@ -60,7 +60,7 @@ export function Combobox({ items, searching, value, onChange, className }: Props
 										value={framework}
 										className="cursor-pointer"
 										onSelect={(currentValue) => {
-											onChange(currentValue === value ? "" : currentValue);
+											onChange(currentValue === value ? undefined : currentValue);
 											setOpen(false);
 										}}
 									>
