@@ -142,6 +142,8 @@ const App = () => {
 				<XMsgEventTable data={latestXMsgEvents} isLoading={isLoadingLatestXMsgXReceipt} />
 			</Box>
 
+			<Box className="h-8" />
+
 			<Box className="col-span-4 space-y-2">
 				<Box>
 					<H3 className="font-bold tracking-tight">Latest XMsgs sent</H3>
@@ -150,6 +152,8 @@ const App = () => {
 
 				<XReceiptEventTable data={latestXReceiptEvents} isLoading={isLoadingLatestXMsgXReceipt} />
 			</Box>
+
+			<Box className="h-8" />
 		</Container>
 	);
 };

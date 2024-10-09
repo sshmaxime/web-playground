@@ -52,7 +52,13 @@ const columns: ColumnDef<XMsgEventReadable>[] = [
 
 const XMsgEventTable = ({ data, isLoading }: Props) => {
 	if (isLoading) return <LoaderCircle className="animate-spin" />;
-	return <DataTable columns={columns} data={data} />;
+	return (
+		<DataTable
+			columns={columns}
+			data={data}
+			paginationOptions={{ showPageArrows: true, showPageOf: true, showSelectedRows: true }}
+		/>
+	);
 };
 
 export { XMsgEventTable };
