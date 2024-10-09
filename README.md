@@ -26,9 +26,7 @@ This architecture is designed to promote modularity, reuse, and ease of developm
 
 Within the `apps` workspace, you'll find a curated collection of apps I've developed over the years in `React`, `Next.js` & `Typescript`. While not exhaustive, this list covers a variety of topics, including `blockchain`, `3D`, `ai` projects, and basic `static` applications, to name just a few.
 
-### [Dusk-Explorer](https://web-playground-dusk-explorer.vercel.app/)
-
-![React] ![TypeScript] ![Next.js]
+### [Dusk-Explorer](https://web-playground-dusk-explorer.vercel.app/) ![React] ![TypeScript] ![Next.js]
 
 ![ReactQuery]
 
@@ -36,9 +34,7 @@ Within the `apps` workspace, you'll find a curated collection of apps I've devel
 
 <h1></h1>
 
-### [Omniscient](https://web-playground-omniscient.vercel.app/)
-
-![React] ![TypeScript] ![Next.js]
+### [Omniscient](https://web-playground-omniscient.vercel.app/) ![React] ![TypeScript] ![Next.js]
 
 ![Wagmi] ![Viem] ![ReactQuery]
 
@@ -46,17 +42,13 @@ Within the `apps` workspace, you'll find a curated collection of apps I've devel
 
 <h1></h1>
 
-### [Sshmaxime](https://web-playground-sshmaxime.vercel.app/)
-
-![React] ![TypeScript] ![Next.js]
+### [Sshmaxime](https://web-playground-sshmaxime.vercel.app/) ![React] ![TypeScript] ![Next.js]
 
 > A website talking a little bit about me.
 
 <h1></h1>
 
-### [Boilerplate](https://web-playground-boilerplate.vercel.app/)
-
-![React] ![TypeScript] ![Next.js]
+### [Boilerplate](https://web-playground-boilerplate.vercel.app/) ![React] ![TypeScript] ![Next.js]
 
 > A basic boilerplate to quickly bootstrap a new app.
 
