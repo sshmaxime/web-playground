@@ -40,7 +40,7 @@ Within the `apps` workspace, you'll find a curated collection of apps I've devel
 
 ![React] ![TypeScript] ![Next.js]
 
-![ReactQuery]
+![Wagmi] ![Viem] ![ReactQuery]
 
 > Statistics Explorer for the `Omni` ecosystem.
 
@@ -107,7 +107,9 @@ This package provides a comprehensive set of `base configurations` essential for
 [React]: https://img.shields.io/badge/React-black.svg?logo=react&logoColor=fff
 [TypeScript]: https://img.shields.io/badge/TypeScript-black?logo=typescript&logoColor=fff
 [Next.js]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
-[Vercel]: https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white
-[Three.js]: https://img.shields.io/badge/Three.js-000?logo=threedotjs&logoColor=fff
-[Shadcn]: https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff
-[Json]: https://img.shields.io/badge/JSON-000?logo=json&logoColor=fff
+[Vercel]: https://img.shields.io/badge/Vercel-black.svg?logo=vercel&logoColor=white
+[Three.js]: https://img.shields.io/badge/Three.js-black?logo=threedotjs&logoColor=white
+[Shadcn]: https://img.shields.io/badge/shadcn%2Fui-black?logo=shadcnui&logoColor=white
+[Json]: https://img.shields.io/badge/JSON-black?logo=json&logoColor=white
+[Viem]: https://custom-icon-badges.demolab.com/badge/Viem-black?logo=viem&logoColor=white
+[Wagmi]: https://img.shields.io/badge/Wagmi-black?logo=wagmi&logoColor=white
