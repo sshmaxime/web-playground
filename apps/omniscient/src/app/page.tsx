@@ -139,7 +139,7 @@ const App = () => {
 					<H6 className="text-muted-foreground tracking-tight">(Latest 1000 blocks)</H6>
 				</Box>
 
-				<XMsgEventTable data={latestXMsgEvents} isLoading={isLoadingLatestXMsgXReceipt} />
+				<XReceiptEventTable data={latestXReceiptEvents} isLoading={isLoadingLatestXMsgXReceipt} />
 			</Box>
 
 			<Box className="h-8" />
@@ -150,7 +150,7 @@ const App = () => {
 					<H6 className="text-muted-foreground tracking-tight">(Latest 1000 blocks)</H6>
 				</Box>
 
-				<XReceiptEventTable data={latestXReceiptEvents} isLoading={isLoadingLatestXMsgXReceipt} />
+				<XMsgEventTable data={latestXMsgEvents} isLoading={isLoadingLatestXMsgXReceipt} />
 			</Box>
 
 			<Box className="h-8" />
