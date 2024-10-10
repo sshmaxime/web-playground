@@ -2,9 +2,9 @@
 
 import type { PropsWithChildren } from "react";
 
-import { BlockchainProvider } from "@config/providers/blockchain";
-import { QueryProvider } from "@config/providers/query";
-import { ThemeProvider } from "@config/providers/theme";
+import { BlockchainProvider } from "@configs/providers/blockchain";
+import { QueryProvider } from "@configs/providers/query";
+import { ThemeProvider } from "@configs/providers/theme";
 
 /**
  *

@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { inter } from "@web-playground/ui/fonts";
 
-import { Providers } from "@config/providers";
+import { Providers } from "@configs/providers";
 
 import { Footer } from "@components/layouts/footer";
 import { Header } from "@components/layouts/header";
@@ -21,10 +21,7 @@ export default function RootLayout({
 
 			<body className="flex-col antialiased">
 				<Providers>
-					<div
-						data-vaul-drawer-wrapper=""
-						className="flex flex-col bg-background min-h-[100dvh]"
-					>
+					<div data-vaul-drawer-wrapper="" className="flex flex-col bg-background min-h-[100dvh]">
 						<Header />
 
 						<main className="flex-grow flex flex-col">{children}</main>

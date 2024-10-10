@@ -6,8 +6,10 @@
 			"@web-playground/ui/*": ["../../packages/ui/src/*"],
 			"@components/*": ["src/components/*"],
 			"@hooks/*": ["src/hooks/*"],
-			"@config/*": ["src/config/*"],
-			"@assets/*": ["src/assets/*"]
+			"@assets/*": ["src/assets/*"],
+			"@configs/*": ["src/configs/*"],
+			"@server/*": ["src/server/*"],
+			"@store/*": ["src/store/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
