@@ -42,6 +42,14 @@ Within the `apps` workspace, you'll find a curated collection of apps I've devel
 
 <h1></h1>
 
+### [Deblock-Swap](https://web-playground-deblock-swap.vercel.app/) ![React] ![TypeScript] ![Next.js]
+
+![Wagmi] ![Viem] ![ReactQuery]
+
+> Simple Swap component for `Deblock-Hq`.
+
+<h1></h1>
+
 ### [Sshmaxime](https://web-playground-sshmaxime.vercel.app/) ![React] ![TypeScript] ![Next.js]
 
 > A website talking a little bit about me.
