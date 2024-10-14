@@ -1,0 +1,7 @@
+/* 
+* Override default system variables. See `packages/ui/src/globals.css`.
+*/
+:root {
+	--app-w: 1280px !important;
+	--app-px: 2rem !important;
+}
