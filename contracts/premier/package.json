@@ -3,8 +3,10 @@
     "version": "0.0.0",
     "private": true,
     "type": "module",
-    "scripts": {
-        "build": "just build"
-    },
-    "exports": {}
+    "exports": {
+        "./StoreAbi.ts": "./dist/StoreAbi.ts",
+        "./StoreAbi.json": "./dist/StoreAbi.json",
+        "./DropAbi.ts": "./dist/DropAbi.ts",
+        "./DropAbi.json": "./dist/DropAbi.json"
+    }
 }

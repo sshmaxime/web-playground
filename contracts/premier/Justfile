@@ -27,7 +27,8 @@ install:
     forge install OpenZeppelin/openzeppelin-contracts-upgradeable@v5.0.2 --no-commit
 
 # Build.
-build: build_contracts generate_abi
+build: generate_abi
+    forge build
 
 # Deployments.
 deploy-anvil:
@@ -42,11 +43,16 @@ test:
 ##############
 
 [private]
-generate_abi:
+generate_abi: generate_abi_json generate_abi_ts
+
+[private]
+generate_abi_json:
     mkdir -p {{ DIST }}
     forge inspect src/Store.sol:Store abi > {{ DIST }}StoreAbi.json
     forge inspect src/Drop.sol:Drop abi > {{ DIST }}DropAbi.json
 
 [private]
-build_contracts:
-    forge build
+generate_abi_ts:
+    mkdir -p {{ DIST }}
+    echo "const StoreAbi = $(forge inspect src/Store.sol:Store abi) as const;\n\nexport { StoreAbi };" > {{ DIST }}StoreAbi.ts
+    echo "const DropAbi = $(forge inspect src/Drop.sol:Drop abi) as const;\n\nexport { DropAbi };" > {{ DIST }}DropAbi.ts
