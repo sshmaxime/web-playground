@@ -20,16 +20,20 @@ ANVIL_DEFAULT_PARAMS := ANVIL_PARAM_BROADCAST + \
 STORE_CONTRACT := "script/Store.s.sol"
 export STORE_CONTRACT_SALT := env_var("STORE_CONTRACT_SALT")
 
+# Installation.
 install:
     forge install foundry-rs/forge-std@v1.9.3 --no-commit
     forge install OpenZeppelin/openzeppelin-foundry-upgrades@v0.3.6 --no-commit
     forge install OpenZeppelin/openzeppelin-contracts-upgradeable@v5.0.2 --no-commit
 
+# Build.
 build: build_contracts generate_abi
 
-deploy-store-anvil:
+# Deployments.
+deploy-anvil:
     forge script {{ STORE_CONTRACT }} {{ ANVIL_DEFAULT_PARAMS }}
 
+# Test.
 test:
     forge test
 

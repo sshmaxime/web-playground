@@ -2,7 +2,7 @@
 
 ![React] ![TypeScript] ![Next.js] ![Vercel] ![Three.js] ![ReactQuery]
 
-This monorepo is a playground for all of my `React`, `Next.js` & `Typescript` projects.
+This monorepo is a playground for all of my `React`, `Next.js`, `Typescript` & `Solidity` projects.
 
 I’ve spent considerable time developing apps and dApps, both for personal side projects and companies I've worked with. Along the way, I realized the need for a simple, fully-configured, and customizable monorepo that would allow me to quickly iterate on new projects.
 
@@ -10,11 +10,13 @@ I’ve spent considerable time developing apps and dApps, both for personal side
 
 ## Architecture
 
-This monorepo is organized into three main workspaces: `apps`, `packages`, and `configs`. Each workspace serves a distinct purpose, making the overall structure intuitive and easy to navigate.
+This monorepo is organized into four main workspaces: `apps`, `contracts`, `packages`, & `configs`. Each workspace serves a distinct purpose, making the overall structure intuitive and easy to navigate.
 
-- The `apps` workspace contains a collection of projects built with `React`, `Next.js`, and `TypeScript`, ranging from blockchain explorers to static websites.
+- The `apps` workspace contains a collection of projects built with `React`, `Next.js`, & `TypeScript`, ranging from blockchain explorers to static websites.
 
-- The pack`ages workspace houses reusable libraries, providing essential UI components, cryptographic utilities, and TypeScript helpers.
+- The `contracts` workspace includes a set of smart-contracts built and developed with `Solidity` & `Foundry`.
+
+- The `packages` workspace houses reusable libraries, providing essential UI components, cryptographic utilities, and TypeScript helpers.
 
 - The `configs` workspace offers base configurations for TypeScript projects, ensuring consistent setups and best practices across all applications.
 
@@ -59,6 +61,21 @@ Within the `apps` workspace, you'll find a curated collection of apps I've devel
 ### [Boilerplate](https://web-playground-boilerplate.vercel.app/) ![React] ![TypeScript] ![Next.js]
 
 > A basic boilerplate to quickly bootstrap a new app.
+
+---
+
+## Contracts
+
+The `contracts` workspace is dedicated to housing a variety of `smart contracts` that have been developed using `Solidity` and `deployed`/`tested` with `Foundry`. This workspace serves as a central directory for managing and organizing `solidity` code, providing a foundation for decentralized applications and blockchain-based solutions. It streamlines development and ensures all contract-related files are accessible for efficient `testing`, `deployment`, `maintenance` & `usability` for the `apps` workspace.
+
+### @web-playground/contracts-premier
+
+![Solidity]
+
+...
+
+<h1></h1>
+
 
 ---
 
@@ -113,3 +130,4 @@ This package provides a comprehensive set of `base configurations` essential for
 [Json]: https://img.shields.io/badge/JSON-black?logo=json&logoColor=white
 [Viem]: https://custom-icon-badges.demolab.com/badge/Viem-black?logo=viem&logoColor=white
 [Wagmi]: https://img.shields.io/badge/Wagmi-black?logo=wagmi&logoColor=white
+[Solidity]: https://img.shields.io/badge/Solidity-black?logo=solidity&logoColor=white
