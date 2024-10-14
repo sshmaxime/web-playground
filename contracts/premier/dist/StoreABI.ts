@@ -1,4 +1,4 @@
-const StoreAbi = [
+const StoreABI = [
   {
     "type": "constructor",
     "inputs": [
@@ -475,4 +475,4 @@ const StoreAbi = [
   }
 ] as const;
 
-export { StoreAbi };
+export { StoreABI };

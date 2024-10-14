@@ -1,4 +1,4 @@
-const DropAbi = [
+const DropABI = [
   {
     "type": "constructor",
     "inputs": [
@@ -992,4 +992,4 @@ const DropAbi = [
   }
 ] as const;
 
-export { DropAbi };
+export { DropABI };

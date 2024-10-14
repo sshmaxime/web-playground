@@ -4,9 +4,9 @@
     "private": true,
     "type": "module",
     "exports": {
-        "./StoreAbi.ts": "./dist/StoreAbi.ts",
-        "./StoreAbi.json": "./dist/StoreAbi.json",
-        "./DropAbi.ts": "./dist/DropAbi.ts",
-        "./DropAbi.json": "./dist/DropAbi.json"
+        "./StoreABI.ts": "./dist/StoreABI.ts",
+        "./StoreABI.json": "./dist/StoreABI.json",
+        "./DropABI.ts": "./dist/DropABI.ts",
+        "./DropABI.json": "./dist/DropABI.json"
     }
 }

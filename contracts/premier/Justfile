@@ -48,11 +48,11 @@ generate_abi: generate_abi_json generate_abi_ts
 [private]
 generate_abi_json:
     mkdir -p {{ DIST }}
-    forge inspect src/Store.sol:Store abi > {{ DIST }}StoreAbi.json
-    forge inspect src/Drop.sol:Drop abi > {{ DIST }}DropAbi.json
+    forge inspect src/Store.sol:Store abi > {{ DIST }}StoreABI.json
+    forge inspect src/Drop.sol:Drop abi > {{ DIST }}DropABI.json
 
 [private]
 generate_abi_ts:
     mkdir -p {{ DIST }}
-    echo "const StoreAbi = $(forge inspect src/Store.sol:Store abi) as const;\n\nexport { StoreAbi };" > {{ DIST }}StoreAbi.ts
-    echo "const DropAbi = $(forge inspect src/Drop.sol:Drop abi) as const;\n\nexport { DropAbi };" > {{ DIST }}DropAbi.ts
+    echo "const StoreABI = $(forge inspect src/Store.sol:Store abi) as const;\n\nexport { StoreABI };" > {{ DIST }}StoreABI.ts
+    echo "const DropABI = $(forge inspect src/Drop.sol:Drop abi) as const;\n\nexport { DropABI };" > {{ DIST }}DropABI.ts

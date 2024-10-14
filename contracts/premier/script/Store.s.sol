@@ -36,7 +36,6 @@ contract StoreScript is Script {
         store = new Store{salt: contractSalt}(msg.sender);
 
         console.log(address(store));
-        console.log(store.owner());
 
         vm.stopBroadcast();
     }
