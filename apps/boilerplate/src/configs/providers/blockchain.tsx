@@ -2,19 +2,18 @@
 
 import "@rainbow-me/rainbowkit/styles.css";
 
-import type { PropsWithChildren } from "react";
-
+import { ChainConfigsArray } from "@configs/schemas/chains";
 import { RainbowKitProvider, getDefaultConfig } from "@rainbow-me/rainbowkit";
+import type { PropsWithChildren } from "react";
 import { WagmiProvider as WagmiProviderPrimitive } from "wagmi";
-import { mainnet } from "wagmi/chains";
 
 /**
  * Blockchain config.
  */
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
 	appName: "web-playground",
 	projectId: "YOUR_PROJECT_ID",
-	chains: [mainnet],
+	chains: ChainConfigsArray,
 	ssr: true,
 });
 
