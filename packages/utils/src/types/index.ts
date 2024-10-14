@@ -5,4 +5,9 @@ type NonUndefinedObject<T> = {
 	[K in keyof T]-?: Exclude<T[K], undefined>;
 };
 
-export type { NonUndefinedObject };
+/**
+ * @dev
+ */
+type NonEmptyArray<T> = [T, ...T[]];
+
+export type { NonUndefinedObject, NonEmptyArray };
