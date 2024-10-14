@@ -1,0 +1,10 @@
+{
+    "name": "@web-playground/contracts-premier",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "just build"
+    },
+    "exports": {}
+}

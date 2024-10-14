@@ -14,5 +14,15 @@
 	 */
 	"tailwindCSS.experimental.classRegex": [
 		["Styles\\s*(?::\\s*[^=]+)?\\s*=\\s*([^;]*);", "['\"`]([^'\"`]*)['\"`]"]
-	]
+	],
+
+	/*
+	 * Solidity
+	 */
+	"[solidity]": {
+		"editor.defaultFormatter": "JuanBlanco.solidity"
+	},
+	"solidity.packageDefaultDependenciesContractsDirectory": "src",
+	"solidity.packageDefaultDependenciesDirectory": "lib",
+	"solidity.formatter": "forge"
 }

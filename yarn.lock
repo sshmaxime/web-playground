@@ -4085,6 +4085,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@web-playground/contracts-premier@workspace:contracts/premier":
+  version: 0.0.0-use.local
+  resolution: "@web-playground/contracts-premier@workspace:contracts/premier"
+  languageName: unknown
+  linkType: soft
+
 "@web-playground/crypto@workspace:^, @web-playground/crypto@workspace:packages/crypto":
   version: 0.0.0-use.local
   resolution: "@web-playground/crypto@workspace:packages/crypto"
