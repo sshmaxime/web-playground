@@ -1,21 +1,13 @@
 "use server";
 
-import { readContract } from "@wagmi/core";
-
-import { STORE_ADDRESS } from "@configs/constants/addresses";
 import { config } from "@server/config/wagmi";
-import { StoreABI } from "@web-playground/contracts-premier/StoreABI.ts";
+import { readStoreDropSupply } from "@web-playground/contracts-premier/wagmi.ts";
 
 /**
  * @dev
  */
 const getDropSupply = async () => {
-	const dropSupply = await readContract(config, {
-		abi: StoreABI,
-		address: STORE_ADDRESS,
-		functionName: "dropSupply",
-	});
-
+	const dropSupply = await readStoreDropSupply(config, {});
 	return dropSupply;
 };
 

@@ -29,7 +29,7 @@ type ChainConfigs = (typeof ChainConfigs)[keyof typeof ChainConfigs];
 /**
  * @dev List of all the supported chains configurations as non empty array.
  */
-const ChainConfigsArray = Functions.toNonEmptyArray(Object.values(ChainConfigs));
+const ChainConfigsArray = Functions.nonEmptyArray(Object.values(ChainConfigs));
 
 // biome-ignore lint/style/useExportType: <explanation>
 export { ChainConfigs, ChainConfigsArray, type SupportedChain, zSupportedChain };

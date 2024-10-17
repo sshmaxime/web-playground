@@ -43,9 +43,17 @@ contract Drop is DropPrimitive, ReentrancyGuard {
     error InvalidTokenOwner();
     error MaxSupplyReached();
 
-    constructor(uint256 id, uint256 maxSupply, uint256 price, uint8 versions)
+    constructor(
+        uint256 id,
+        uint256 maxSupply,
+        uint256 price,
+        uint8 versions
+    )
         DropPrimitive(id, maxSupply, price, versions)
-        ERC721(string.concat(NAME_PREFIX, Strings.toString(id)), string.concat(SYMBOL_PREFIX, Strings.toString(id)))
+        ERC721(
+            string.concat(NAME_PREFIX, Strings.toString(id)),
+            string.concat(SYMBOL_PREFIX, Strings.toString(id))
+        )
         Ownable(msg.sender)
     {}
 
@@ -56,7 +64,10 @@ contract Drop is DropPrimitive, ReentrancyGuard {
     /**
      * @dev Mint a Item.
      */
-    function mint(uint8 versionId, address caller) external payable onlyOwner returns (uint256 itemId) {
+    function mint(
+        uint8 versionId,
+        address caller
+    ) external payable onlyOwner returns (uint256 itemId) {
         itemId = totalSupply();
 
         // Item id to be minted needs to be below the max supply limit.
@@ -73,14 +84,22 @@ contract Drop is DropPrimitive, ReentrancyGuard {
             id: itemId,
             version: versionId,
             status: ItemStatus.DEFAULT,
-            mutation: ItemMutation({tokenContract: IERC721(address(0)), tokenId: 0})
+            mutation: ItemMutation({
+                tokenContract: IERC721(address(0)),
+                tokenId: 0
+            })
         });
     }
 
     /**
      * @dev Mutate a Item.
      */
-    function mutate(uint256 itemId, IERC721 tokenContract, uint256 tokenId, address caller) external onlyOwner {
+    function mutate(
+        uint256 itemId,
+        IERC721 tokenContract,
+        uint256 tokenId,
+        address caller
+    ) external onlyOwner {
         Item storage _item = itemIdToItem[itemId];
 
         // Caller should own the Item.
@@ -91,7 +110,8 @@ contract Drop is DropPrimitive, ReentrancyGuard {
         if (_item.status != ItemStatus.DEFAULT) revert AlreadyMutated();
 
         // Owner of tokenId should be the caller.
-        if (tokenContract.ownerOf(tokenId) != caller) revert InvalidTokenOwner();
+        if (tokenContract.ownerOf(tokenId) != caller)
+            revert InvalidTokenOwner();
 
         _item.status = ItemStatus.MUTATED;
         _item.mutation.tokenContract = tokenContract;
@@ -110,18 +130,19 @@ contract Drop is DropPrimitive, ReentrancyGuard {
      * @dev Returns the Drop.
      */
     function dropData() public view returns (DropData memory) {
-        return DropData({
-            symbol: symbol(),
-            name: name(),
-            id: dropId(),
-            maxSupply: maxSupply(),
-            versions: versions(),
-            price: price(),
-            currentSupply: totalSupply(),
-            contractURI: contractURI(),
-            dropURI: dropURI(),
-            baseURI: baseURI()
-        });
+        return
+            DropData({
+                symbol: symbol(),
+                name: name(),
+                id: dropId(),
+                maxSupply: maxSupply(),
+                versions: versions(),
+                price: price(),
+                currentSupply: totalSupply(),
+                contractURI: contractURI(),
+                dropURI: dropURI(),
+                baseURI: baseURI()
+            });
     }
 
     /**

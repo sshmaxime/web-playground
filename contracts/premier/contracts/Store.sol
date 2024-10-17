@@ -59,7 +59,7 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * Constructor.
      */
-    constructor(address owner) Ownable(owner) {}
+    constructor() Ownable(tx.origin) {}
 
     /**
      * Factory.
@@ -68,7 +68,11 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * @dev Create a Drop.
      */
-    function createDrop(uint256 maxSupply, uint256 mintPrice, uint8 versions) external onlyOwner {
+    function createDrop(
+        uint256 maxSupply,
+        uint256 mintPrice,
+        uint8 versions
+    ) external onlyOwner {
         uint256 dropId = dropSupply();
         drops[dropId] = new Drop(dropId, maxSupply, mintPrice, versions);
 
@@ -84,8 +88,14 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * @dev Mint an Item.
      */
-    function mint(uint256 dropId, uint8 versionId) external payable nonReentrant {
-        uint256 itemId = drop(dropId).mint{value: msg.value}(versionId, msg.sender);
+    function mint(
+        uint256 dropId,
+        uint8 versionId
+    ) external payable nonReentrant {
+        uint256 itemId = drop(dropId).mint{value: msg.value}(
+            versionId,
+            msg.sender
+        );
 
         emit Minted(dropId, itemId);
     }
@@ -93,7 +103,12 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * @dev Mutate an Item.
      */
-    function mutate(uint256 dropId, uint256 itemId, IERC721 tokenContract, uint256 tokenId) external nonReentrant {
+    function mutate(
+        uint256 dropId,
+        uint256 itemId,
+        IERC721 tokenContract,
+        uint256 tokenId
+    ) external nonReentrant {
         drop(dropId).mutate(itemId, tokenContract, tokenId, msg.sender);
 
         emit Mutated(dropId, itemId);
@@ -111,7 +126,9 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * @dev Returns the Drop associated with the given `dropId`.
      */
-    function drop(uint256 dropId) public view validDropId(dropId) returns (Drop) {
+    function drop(
+        uint256 dropId
+    ) public view validDropId(dropId) returns (Drop) {
         return drops[dropId];
     }
 
@@ -122,21 +139,30 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * @dev Set the contractURI of a Drop.
      */
-    function setContractURI(uint256 dropId, string memory newURI) external onlyOwner {
+    function setContractURI(
+        uint256 dropId,
+        string memory newURI
+    ) external onlyOwner {
         drop(dropId).setContractURI(newURI);
     }
 
     /**
      * @dev Set the dropURI of a Drop.
      */
-    function setDropURI(uint256 dropId, string memory newURI) external onlyOwner {
+    function setDropURI(
+        uint256 dropId,
+        string memory newURI
+    ) external onlyOwner {
         drop(dropId).setDropURI(newURI);
     }
 
     /**
      * @dev Set the baseURI of a Drop.
      */
-    function setBaseURI(uint256 dropId, string memory newURI) external onlyOwner {
+    function setBaseURI(
+        uint256 dropId,
+        string memory newURI
+    ) external onlyOwner {
         drop(dropId).setBaseURI(newURI);
     }
 
@@ -154,7 +180,10 @@ contract Store is ReentrancyGuard, Ownable {
     /**
      * @dev Returns the Item data associated with the given `dropId` & `itemId`.
      */
-    function itemData(uint256 dropId, uint256 itemId) external view returns (ItemData memory) {
+    function itemData(
+        uint256 dropId,
+        uint256 itemId
+    ) external view returns (ItemData memory) {
         return drop(dropId).itemData(itemId);
     }
 

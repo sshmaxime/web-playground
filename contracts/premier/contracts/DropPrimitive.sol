@@ -73,7 +73,12 @@ abstract contract DropPrimitive is ERC721Enumerable, Ownable {
     error InvalidMaxSupply();
     error InvalidVersions();
 
-    constructor(uint256 id, uint256 _maxSupply, uint256 _price, uint8 _versions) {
+    constructor(
+        uint256 id,
+        uint256 _maxSupply,
+        uint256 _price,
+        uint8 _versions
+    ) {
         DROP_ID = id;
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
