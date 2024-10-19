@@ -29,7 +29,8 @@
         "viem": "^2.7.6"
     },
     "exports": {
-        "./wagmi.ts": "./dist/wagmi.ts"
+        "./wagmi.ts": "./src/wagmi.ts",
+        "./types.ts": "./src/types.ts"
     },
     "packageManager": "yarn@4.1.0"
 }
