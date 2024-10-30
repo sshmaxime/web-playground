@@ -1,8 +1,11 @@
-import { Center, useGLTF } from "@react-three/drei";
-import React, { type FC } from "react";
-import type * as THREE from "three";
+import { Bounds, Center, useBounds, useGLTF } from "@react-three/drei";
+import { Select } from "@react-three/postprocessing";
+import { debounce } from "lodash";
+import React, { type PropsWithChildren, useCallback, useState, type FC, useEffect } from "react";
+import * as THREE from "three";
 import type { GLTF } from "three-stdlib";
 
+import type { ThreeEvent } from "@react-three/fiber";
 import {
 	generatesCanvasTexture,
 	loadTextureTextToObject,
@@ -48,11 +51,11 @@ export const useSkateRefsLoader = () => {
 };
 
 export const defaultSkateModelAnimation = (refs: SkateRefs, props: ModelMetadataProps) => ({
-	_changeTextureDeck(img: any) {
-		loadTextureToObject(img, refs.deckRef);
+	_changeTextureDeck(imgPath: string) {
+		loadTextureToObject(imgPath, refs.deckRef);
 	},
-	_changeTexturePlaceholder(img: any) {
-		loadTextureToObject(img, refs.placeholderRef);
+	_changeTexturePlaceholder(imgPath: string) {
+		loadTextureToObject(imgPath, refs.placeholderRef);
 	},
 	_changeTextureText(dripId: number, dropId: number, totalSupply: number) {
 		loadTextureTextToObject(dripId, dropId, totalSupply, refs.textRef);
@@ -61,8 +64,8 @@ export const defaultSkateModelAnimation = (refs: SkateRefs, props: ModelMetadata
 	updateVersion(version: number) {
 		this._changeTextureDeck(props.versions[version].texture);
 	},
-	updateItem(img: any) {
-		this._changeTexturePlaceholder(img);
+	updateItem(imgPath: string) {
+		this._changeTexturePlaceholder(imgPath);
 	},
 });
 
@@ -79,11 +82,20 @@ export type ModelMetadataProps = {
 	initialDropId: number;
 	initialMaxSupply: number;
 
-	// ThreeProps //
+	/**
+	 * @dev Three.
+	 */
 	three?: {
 		group?: JSX.IntrinsicElements["group"];
 		deck?: JSX.IntrinsicElements["mesh"];
 		placeholder?: JSX.IntrinsicElements["mesh"];
+	};
+
+	/**
+	 * @dev Actions.
+	 */
+	actions?: {
+		onSelected: () => void;
 	};
 };
 
@@ -94,11 +106,11 @@ const Skate: FC<ModelProps> = React.memo(
 		// model
 		const { nodes, materials } = useGLTF(props.model) as GLTFResult;
 		// Deck
-		materials.Deck.color = null as any;
+		materials.Deck.color = new THREE.Color(0xffffff);
 		materials.Deck.toneMapped = false;
 		//
 		// // Placeholder
-		materials.Placeholder.color = null as any;
+		materials.Placeholder.color = new THREE.Color(0xffffff);
 		materials.Placeholder.toneMapped = false;
 
 		// setup refs
@@ -131,33 +143,52 @@ const Skate: FC<ModelProps> = React.memo(
 		const deckInitialTexture = textures[props.initialVersion];
 		materials.Deck.map = deckInitialTexture;
 
+		const [hovered, hover] = useState(null);
+		const debouncedHover = useCallback(debounce(hover, 30), []);
+
+		const over = (name: string) => (e: ThreeEvent<PointerEvent>) => {
+			e.stopPropagation();
+			debouncedHover(name);
+		};
+
 		return (
 			<group ref={group} {...props.three?.group}>
-				<Center>
-					<group rotation={[Math.PI, Math.PI / 2, Math.PI / 2]} dispose={null}>
-						<mesh
-							ref={deckRef}
-							castShadow
-							geometry={nodes.Deck.geometry}
-							material={materials.Deck}
-							rotation={[Math.PI / 2, 0, 0]}
-							{...props.three?.deck}
-						/>
-						<mesh
-							ref={placeholderRef}
-							castShadow
-							geometry={nodes.Placeholder.geometry}
-							material={materials.Placeholder}
-							rotation={[Math.PI / 2, 0, 0]}
-							{...props.three?.placeholder}
-						/>
+				<Bounds fit clip observe margin={1.2}>
+					<Center>
+						<group rotation={[Math.PI, Math.PI / 2, Math.PI / 2]} dispose={null}>
+							<mesh
+								ref={deckRef}
+								castShadow
+								geometry={nodes.Deck.geometry}
+								material={materials.Deck}
+								rotation={[Math.PI / 2, 0, 0]}
+								{...props.three?.deck}
+							/>
 
-						<mesh position={[31.5, 7.7, 0]} rotation={[Math.PI / 2, 0.25, -Math.PI / -2]}>
-							<planeGeometry args={[10, 10, 10, 10]} />
-							<meshBasicMaterial ref={textRef} transparent map={textTexture} />
-						</mesh>
-					</group>
-				</Center>
+							<SelectToZoom onSelected={props.actions?.onSelected}>
+								<Select
+									enabled={hovered === "BRÖNDEN"}
+									onPointerOver={over("BRÖNDEN")}
+									onPointerOut={() => debouncedHover(null)}
+								>
+									<mesh
+										ref={placeholderRef}
+										castShadow
+										geometry={nodes.Placeholder.geometry}
+										material={materials.Placeholder}
+										rotation={[Math.PI / 2, 0, 0]}
+										{...props.three?.placeholder}
+									/>
+								</Select>
+							</SelectToZoom>
+
+							<mesh position={[31.5, 7.7, 0]} rotation={[Math.PI / 2, 0.25, -Math.PI / -2]}>
+								<planeGeometry args={[10, 10, 10, 10]} />
+								<meshBasicMaterial ref={textRef} transparent map={textTexture} />
+							</mesh>
+						</group>
+					</Center>
+				</Bounds>
 			</group>
 		);
 	},
@@ -165,5 +196,32 @@ const Skate: FC<ModelProps> = React.memo(
 		return true;
 	},
 );
+
+type Props = { onSelected?: () => void } & PropsWithChildren;
+function SelectToZoom({ children, onSelected }: Props) {
+	const api = useBounds();
+	const [selected, setSelected] = useState(false);
+
+	useEffect(() => {
+		selected && onSelected?.();
+	}, [selected, onSelected]);
+
+	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+		<group
+			onClick={(e: ThreeEvent<MouseEvent>) => {
+				e.stopPropagation();
+				api.refresh(e.object).fit();
+				setSelected(true);
+			}}
+			onPointerMissed={(e: MouseEvent) => {
+				e.button === 0 && api.refresh().fit();
+				setSelected(false);
+			}}
+		>
+			{children}
+		</group>
+	);
+}
 
 export default Skate;

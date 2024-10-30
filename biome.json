@@ -8,6 +8,9 @@
 				"noUnusedImports": "error",
 				"noUnusedPrivateClassMembers": "error",
 				"noUnusedVariables": "error"
+			},
+			"style": {
+				"noNonNullAssertion": "off"
 			}
 		}
 	},

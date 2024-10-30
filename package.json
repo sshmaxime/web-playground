@@ -9,7 +9,7 @@
 		"dev": "TURBO_UI=true turbo dev --parallel",
 		"start": "turbo start --parallel",
 		"build": "turbo build",
-		"load-env": "yarn vercel env pull .env --cwd ./apps/dusk-explorer && yarn vercel env pull .env --cwd ./apps/omniscient",
+		"load-env": "yarn vercel env pull .env --cwd ./apps/dusk-explorer && yarn vercel env pull .env --cwd ./apps/omniscient && yarn vercel env pull .env --cwd ./apps/premier",
 		"clean": "turbo clean && git clean -xdf node_modules",
 		"quality": "biome check . && turbo quality --parallel",
 		"quality:fix": "biome check . --apply && turbo quality:fix --parallel"

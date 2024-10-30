@@ -1,7 +1,9 @@
 /**
  * @dev
  */
-enum ENV_KEY {}
+enum ENV_KEY {
+	NODE_ENV = "NODE_ENV",
+}
 
 /**
  * @dev

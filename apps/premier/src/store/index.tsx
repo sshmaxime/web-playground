@@ -1,15 +1,16 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
-type AppState = {};
+type AppState = {
+	open: boolean;
+	setOpen: (open: boolean) => void;
+};
 
-const useAppState = create<AppState>()(
-	devtools(
-		persist(() => ({}), {
-			name: "app-state",
-		}),
-	),
+const useStore = create<AppState>()(
+	devtools((set) => ({
+		open: false,
+		setOpen: (open) => set(() => ({ open: !open })),
+	})),
 );
 
-export { useAppState };
+export { useStore };

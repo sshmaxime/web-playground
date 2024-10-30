@@ -1,6 +1,8 @@
 import "@web-playground/ui/globals.css";
 import "./system.css";
 
+import "react-loading-skeleton/dist/skeleton.css";
+
 import { Analytics } from "@vercel/analytics/react";
 
 import { inter } from "@web-playground/ui/fonts";
@@ -19,7 +21,7 @@ export default function RootLayout({
 		<html lang="en" className={inter.className} suppressHydrationWarning>
 			<meta name="theme-color" content="transparent" />
 
-			<body className="flex-col antialiased">
+			<body className="flex-col antialiased lg:overflow-hidden">
 				<Providers>
 					<div data-vaul-drawer-wrapper="" className="flex flex-col bg-background min-h-[100dvh]">
 						<Header />

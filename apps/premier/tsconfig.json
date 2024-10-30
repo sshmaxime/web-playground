@@ -9,7 +9,8 @@
 			"@assets/*": ["src/assets/*"],
 			"@configs/*": ["src/configs/*"],
 			"@server/*": ["src/server/*"],
-			"@store/*": ["src/store/*"]
+			"@store/*": ["src/store/*"],
+			"@threejs/*": ["src/threejs/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

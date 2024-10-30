@@ -12,6 +12,7 @@ import ModelSkate, {
 	useSkateRefsLoader,
 } from "../models/skate";
 
+import { Bloom, EffectComposer, Outline, Selection } from "@react-three/postprocessing";
 import LoaderScene from "src/threejs/utils/loaderScene";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
@@ -23,22 +24,10 @@ const sceneFunctions = (
 ) => ({
 	...refs,
 	...defaultSkateModelAnimation(refs, props),
-	reset3DView() {
-		camera.current?.setPosition(0, 40, -65, true);
-	},
+	reset3DView: () => camera.current?.setPosition(0, 40, -65, true),
 });
 
-const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
-	return (
-		<LoaderScene>
-			<Suspense>
-				<Scene {...props} />
-			</Suspense>
-		</LoaderScene>
-	);
-});
-
-const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
+const SkateScene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
 	const cameraControls = React.useRef<CameraControls>(null!);
 	const refCam = React.useRef(null!);
 
@@ -66,9 +55,16 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((p
 			<spotLight intensity={0.05} angle={0.15} penumbra={1} position={[300, 300, 300]} castShadow />
 			<ambientLight intensity={3} />
 
-			<group position={[0, 40, 0]}>
-				<ModelSkate refs={refs} three={{ group: {} }} {...props} />
-			</group>
+			<Selection>
+				<EffectComposer autoClear={false}>
+					<Outline blur edgeStrength={10} visibleEdgeColor={0xffffff} />
+					<Bloom mipmapBlur luminanceThreshold={1} />
+				</EffectComposer>
+
+				<group position={[0, 40, 0]}>
+					<ModelSkate refs={refs} {...props} />
+				</group>
+			</Selection>
 
 			<ContactShadows
 				rotation={[-Math.PI / 2, 0, 0]}
@@ -77,10 +73,20 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((p
 				width={10}
 				height={10}
 				blur={1.5}
-				far={15}
+				far={6}
 			/>
 		</>
 	);
 });
 
-export default SceneLoader;
+const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
+	return (
+		<LoaderScene>
+			<Suspense>
+				<SkateScene {...props} />
+			</Suspense>
+		</LoaderScene>
+	);
+});
+
+export { Scene };
