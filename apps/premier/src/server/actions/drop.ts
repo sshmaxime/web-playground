@@ -11,7 +11,6 @@ import { readStoreDropData } from "@web-playground/contracts-premier/wagmi.ts";
  * @dev
  */
 const drop = async (dropId: bigint, chainId: AppChainId): Promise<Drop> => {
-	console.log(dropId, chainId);
 	const dropData = await readStoreDropData(config, { args: [dropId], chainId });
 	const dropMetadata = await fetchDropMetadata(dropData.dropURI);
 

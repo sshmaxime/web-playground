@@ -148,7 +148,8 @@ const Skate: FC<ModelProps> = React.memo(
 
 		const over = (name: string) => (e: ThreeEvent<PointerEvent>) => {
 			e.stopPropagation();
-			debouncedHover(name);
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			debouncedHover(name as any);
 		};
 
 		return (
