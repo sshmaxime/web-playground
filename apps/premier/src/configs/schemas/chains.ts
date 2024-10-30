@@ -1,4 +1,4 @@
-import { ServerEnv } from "@configs/env/server";
+import { ClientEnv } from "@configs/env/client";
 import { RPCS } from "@server/config/rpcs";
 import { Functions } from "@web-playground/utils";
 import { Network } from "alchemy-sdk";
@@ -38,8 +38,6 @@ const ChainConfigs = {
 } as const satisfies { [key in AppChainName]: ChainConfig };
 type ChainConfigs = (typeof ChainConfigs)[keyof typeof ChainConfigs];
 
-console.log(ServerEnv);
-
 /**
  * @dev List of all the supported chains configurations as non empty array.
  */
@@ -67,10 +65,10 @@ const chainIdAsChainName = (chainId: number) =>
  * @dev
  */
 const DEFAULT_CHAIN_ID = (() => {
-	switch (ServerEnv.NODE_ENV) {
+	switch (ClientEnv.VERCEL_ENV) {
 		case "production":
 			return ChainConfigs.Ethereum.viem.id;
-		case "staging":
+		case "preview":
 			return ChainConfigs.OptimismSepolia.viem.id;
 
 		default:

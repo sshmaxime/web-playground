@@ -1,15 +1,12 @@
-/**
- * @dev
- */
-enum ENV_KEY {
-	NODE_ENV = "NODE_ENV",
-}
+type ClientEnv = {
+	VERCEL_ENV: "production" | "preview" | "development";
+};
 
 /**
  * @dev
  */
-const ClientEnv = Object.fromEntries(
-	Object.values(ENV_KEY).map((key) => [key, process.env[key]]),
-) as { [key in ENV_KEY]: string };
+const ClientEnv = {
+	VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV ?? "development",
+} as ClientEnv;
 
 export { ClientEnv };

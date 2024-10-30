@@ -1,19 +1,15 @@
-/**
- * @dev
- */
-enum ENV_KEY {
-	ALCHEMY_API_KEY = "ALCHEMY_API_KEY",
-	NODE_ENV = "NODE_ENV",
-	VERCEL_ENV = "VERCEL_ENV",
-
-	NEXT_PUBLIC_LOL = "NEXT_PUBLIC_LOL",
-}
+type ServerEnv = {
+	VERCEL_ENV: "production" | "preview" | "development";
+	ALCHEMY_API_KEY: string;
+};
 
 /**
  * @dev
  */
-const ServerEnv = Object.fromEntries(
-	Object.values(ENV_KEY).map((key) => [key, process.env[key]]),
-) as { [key in ENV_KEY]: string };
+const ServerEnv = {
+	VERCEL_ENV: process.env.VERCEL_ENV ?? "development",
+	ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY,
+} as ServerEnv;
 
+// biome-ignore lint/style/useExportType: <explanation>
 export { ServerEnv };
