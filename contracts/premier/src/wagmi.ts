@@ -29,6 +29,7 @@ export const dropAbi = [
     type: 'constructor',
     inputs: [
       { name: 'id', internalType: 'uint256', type: 'uint256' },
+      { name: 'name', internalType: 'string', type: 'string' },
       { name: 'maxSupply', internalType: 'uint256', type: 'uint256' },
       { name: 'price', internalType: 'uint256', type: 'uint256' },
       { name: 'versions', internalType: 'uint8', type: 'uint8' },
@@ -3101,6 +3102,7 @@ export const storeAbi = [
   {
     type: 'function',
     inputs: [
+      { name: 'name', internalType: 'string', type: 'string' },
       { name: 'maxSupply', internalType: 'uint256', type: 'uint256' },
       { name: 'mintPrice', internalType: 'uint256', type: 'uint256' },
       { name: 'versions', internalType: 'uint8', type: 'uint8' },
@@ -3281,7 +3283,7 @@ export const storeAbi = [
 ] as const
 
 export const storeAddress =
-  '0xa80e81F9FE7CbFd66E62c50e720c2505775a7393' as const
+  '0x229a6c90721AB98E69836a245B03a90547Ae086F' as const
 
 export const storeConfig = { address: storeAddress, abi: storeAbi } as const
 

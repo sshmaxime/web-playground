@@ -45,15 +45,13 @@ contract Drop is DropPrimitive, ReentrancyGuard {
 
     constructor(
         uint256 id,
+        string memory name,
         uint256 maxSupply,
         uint256 price,
         uint8 versions
     )
         DropPrimitive(id, maxSupply, price, versions)
-        ERC721(
-            string.concat(NAME_PREFIX, Strings.toString(id)),
-            string.concat(SYMBOL_PREFIX, Strings.toString(id))
-        )
+        ERC721(name, string.concat(SYMBOL_PREFIX, Strings.toString(id)))
         Ownable(msg.sender)
     {}
 

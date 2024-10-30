@@ -1,0 +1,51 @@
+{
+	"id": 0,
+	"name": "Skateboard",
+
+	"maxSupply": 10,
+	"price": "250000000000000000",
+	"versions": 6,
+
+	"metadata": {
+		"model": {
+			"filePath": "assets/model.glb"
+		},
+		"informations": [
+			{ "title": "Description", "filePath": "assets/product/description.html" },
+			{ "title": "Characteristics", "filePath": "assets/product/characteristics.html" },
+			{ "title": "Additional Information", "filePath": "assets/product/additionalInformation.html" }
+		],
+		"versions": [
+			{
+				"color": "#09090c",
+				"name": "niceblack",
+				"filePath": "assets/textures/0.png"
+			},
+			{
+				"color": "#E6C8FA",
+				"name": "nicepurple",
+				"filePath": "assets/textures/1.png"
+			},
+			{
+				"color": "#FFEEB5",
+				"name": "niceyellow",
+				"filePath": "assets/textures/2.png"
+			},
+			{
+				"color": "#8AFFD0",
+				"name": "nicegreen",
+				"filePath": "assets/textures/3.png"
+			},
+			{
+				"color": "#B0E1FF",
+				"name": "niceblue",
+				"filePath": "assets/textures/4.png"
+			},
+			{
+				"color": "#E3E3ED",
+				"name": "nicegrey",
+				"filePath": "assets/textures/5.png"
+			}
+		]
+	}
+}

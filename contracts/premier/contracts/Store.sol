@@ -69,12 +69,13 @@ contract Store is ReentrancyGuard, Ownable {
      * @dev Create a Drop.
      */
     function createDrop(
+        string memory name,
         uint256 maxSupply,
         uint256 mintPrice,
         uint8 versions
     ) external onlyOwner {
         uint256 dropId = dropSupply();
-        drops[dropId] = new Drop(dropId, maxSupply, mintPrice, versions);
+        drops[dropId] = new Drop(dropId, name, maxSupply, mintPrice, versions);
 
         DROP_SUPPLY++;
 

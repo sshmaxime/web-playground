@@ -1,52 +1,76 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import type { DropMetadata } from "../src/types";
-
+import { minify } from "html-minifier-terser";
 import { create } from "ipfs-http-client";
+import type { Config, DropMetadata } from "../src/types";
 
 const DROP_DIR = path.join(__dirname, "..", "resources", "drop");
-const DROP_VERSIONS_DIR_NAME = "versions";
-const DROP_MODEL_FILE = "model.glb";
 
 export const IPFS_PREFIX = "ipfs://";
 
 const node = create({ url: "/ip4/127.0.0.1/tcp/5001" });
 
-const generateDropMetadata = async (dropId: number): Promise<DropMetadata> => {
-	const dropDir = path.join(DROP_DIR, dropId.toString());
-	const dropModelFile = path.join(dropDir, DROP_MODEL_FILE);
-	const dropVersionsDir = path.join(dropDir, DROP_VERSIONS_DIR_NAME);
+const publishDropMetadataToIpfs = async (dropConfig: Config) => {
+	const dropDir = path.join(DROP_DIR, dropConfig.id.toString());
 
-	// Upload model
-	const modelData = await fs.readFile(dropModelFile);
-	const modelFile = await node.add({ content: modelData });
-	const modelAddress = IPFS_PREFIX + modelFile.cid.toV1().toString();
+	/**
+	 * @dev Upload model on IPFS.
+	 */
+	const modelFilePath = path.join(dropDir, dropConfig.metadata.model.filePath);
+	const modelFile = await fs.readFile(modelFilePath);
+	const modelIpfsResult = await node.add({ content: modelFile });
+	const modelIpfsAddress = IPFS_PREFIX + modelIpfsResult.cid.toV1().toString();
 
-	// Upload each versions
+	/**
+	 * @dev Upload each versions on IPFS.
+	 */
 	const versions: DropMetadata["versions"] = [];
-	const files = await fs.readdir(dropVersionsDir);
-	for (let index = 0; index < files.length / 2; index++) {
-		const infoFile = path.join(dropVersionsDir, `${index}.info.json`);
-		const textureFileName = path.join(dropVersionsDir, `${index}.texture.png`);
+	for (const [index, version] of dropConfig.metadata.versions.entries()) {
+		const { name, color, filePath } = version;
 
-		const textureData = await fs.readFile(textureFileName);
-		const textureFile = await node.add({ content: textureData });
-		const textureAddress = IPFS_PREFIX + textureFile.cid.toV1().toString();
+		const textureFilePath = path.join(dropDir, filePath);
+		const textureFile = await fs.readFile(textureFilePath);
+		const textureIpfsResult = await node.add({ content: textureFile });
+		const textureIpfsAddress = IPFS_PREFIX + textureIpfsResult.cid.toV1().toString();
 
-		const info = JSON.parse((await fs.readFile(infoFile)).toString());
-		info.texture = textureAddress;
-		versions.push(info);
+		const versionItem: DropMetadata["versions"][number] = {
+			id: index,
+			name: name,
+			color: color,
+			texture: textureIpfsAddress,
+		};
+
+		versions.push(versionItem);
 	}
 
-	return { id: dropId, model: modelAddress, versions };
+	const informations: DropMetadata["informations"] = [];
+	for (const information of dropConfig.metadata.informations) {
+		const { title, filePath } = information;
+
+		const informationFilePath = path.join(dropDir, filePath);
+		const informationFile = await fs.readFile(informationFilePath, "utf-8");
+		const informationMinified = await minify(informationFile, { collapseWhitespace: true });
+
+		const informationitem: DropMetadata["informations"][number] = {
+			title: title,
+			html: informationMinified,
+		};
+
+		informations.push(informationitem);
+	}
+
+	const metadata: DropMetadata = {
+		id: dropConfig.id,
+		model: modelIpfsAddress,
+		versions: versions,
+		informations: informations,
+	};
+
+	const metadataIpfsResult = await node.add({ content: JSON.stringify(metadata) });
+	const metadataIpfsAddress = IPFS_PREFIX + metadataIpfsResult.cid.toV1().toString();
+
+	return { metadataIpfsAddress };
 };
 
-export const publishDropMetadataToIPFS = async (dropId: number) => {
-	const result = await generateDropMetadata(dropId);
-
-	const file = await node.add({ content: JSON.stringify(result) });
-	const fileAddress = IPFS_PREFIX + file.cid.toString();
-
-	return fileAddress;
-};
+export { publishDropMetadataToIpfs };

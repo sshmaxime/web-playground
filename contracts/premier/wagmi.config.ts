@@ -6,7 +6,7 @@ import { react } from "@wagmi/cli/plugins";
 export default defineConfig({
 	out: "src/wagmi.ts",
 	plugins: [
-		hardhat({ project: ".", deployments: { Store: "0xa80e81F9FE7CbFd66E62c50e720c2505775a7393" } }),
+		hardhat({ project: ".", deployments: { Store: "0x229a6c90721AB98E69836a245B03a90547Ae086F" } }),
 		actions(),
 		react(),
 	],

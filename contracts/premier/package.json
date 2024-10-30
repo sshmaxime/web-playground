@@ -4,7 +4,9 @@
     "private": true,
     "scripts": {
         "build": "hardhat compile && wagmi generate",
-        "clean": "rm -rf dist artifacts cache typechain"
+        "clean": "rm -rf dist artifacts cache typechain",
+        "redeploy": "rm -rf ignition/deployments && hardhat run scripts/deploy.ts --network localhost",
+        "localIpfs": "docker run -d --name ipfs_host -p 4001:4001 -p 4001:4001/udp -p 127.0.0.1:8080:8080 -p 127.0.0.1:5001:5001 ipfs/kubo:latest"
     },
     "devDependencies": {
         "@nomicfoundation/hardhat-ignition": "^0.15.0",
@@ -16,6 +18,7 @@
         "@openzeppelin/contracts": "^5.0.2",
         "@types/chai": "^4.2.0",
         "@types/chai-as-promised": "^7.1.6",
+        "@types/html-minifier-terser": "^7.0.2",
         "@types/mocha": ">=9.1.0",
         "@types/node": ">=18.0.0",
         "@wagmi/cli": "^2.1.16",
@@ -23,6 +26,8 @@
         "dotenv": "^16.4.5",
         "hardhat": "^2.22.13",
         "hardhat-gas-reporter": "^1.0.8",
+        "html-minifier-terser": "^7.2.0",
+        "ipfs-http-client": "56.0.2",
         "solidity-coverage": "^0.8.0",
         "ts-node": ">=8.0.0",
         "typescript": "^5.6.3",
